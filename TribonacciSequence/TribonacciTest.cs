@@ -9,6 +9,22 @@ namespace TribonacciSequence
     public class TribonacciTest
     {
         [TestMethod]
+        public void Input_111_0_shouldReturn_1_1_1()
+        {
+            var result = Variabonacci.Tribonacci(new double[] { 1, 1, 1 }, 0);
+
+            CollectionAssert.AreEqual(new double[] {0}, result);
+        }
+
+        [TestMethod]
+        public void Input_111_2_shouldReturn_1_1()
+        {
+            var result = Variabonacci.Tribonacci(new double[] { 1, 1, 1 }, 2);
+
+            CollectionAssert.AreEqual(new double[] {1, 1}, result);
+        }
+
+        [TestMethod]
         public void Input_111_3_shouldReturn_1_1_1()
         {
             var result = Variabonacci.Tribonacci(new double[] {1, 1, 1}, 3);
@@ -53,13 +69,17 @@ namespace TribonacciSequence
     {
         public static double[] Tribonacci(double[] signature, int n)
         {
+            if (n == 0)
+            {
+                return new double[]{0};
+            }
             var tempSignature = signature.ToList();
             for (int i = 0; i < n - 3; i++)
             {
                 tempSignature.Add(tempSignature[i] + tempSignature[i+1] + tempSignature[i+2]);
             }
             
-            return tempSignature.ToArray();
+            return tempSignature.Take(n).ToArray();
         }
     }
 }
